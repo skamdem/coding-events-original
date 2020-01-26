@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Coding Events</title>
+<head th:replace="fragments :: head">
 </head>
 <body>
 
 <h1>All Events</h1>
 
-<ul>
-    <th:block th:each="event : ${events}">
-        <li th:text="${event}"></li>
-    </th:block>
-</ul>
+<table>
+    <thead>
+        <tr>
+            <th>Event Language</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tr th:each="event : ${events.entrySet()}">
+        <td th:text="${event.getKey()}"></td>
+        <td th:text="${event.getValue()}"></td>
+    </tr>
+    <tr>
+        <td  colspan="2"><span th:replace = "fragments :: techHubAddress"></span></td>
+    </tr>
+</table>
 
 </body>
 </html>
