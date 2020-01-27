@@ -8,17 +8,19 @@
 
 <table>
     <thead>
-        <tr>
-            <th>Event Language</th>
-            <th>Description</th>
-        </tr>
+    <tr>
+        <th th:text="${tableHeader[0]}"></th>
+        <th th:text="${tableHeader[1]}"></th>
+        <th th:text="${tableHeader[2]}"></th>
+    </tr>
     </thead>
-    <tr th:each="event : ${events.entrySet()}">
-        <td th:text="${event.getKey()}"></td>
-        <td th:text="${event.getValue()}"></td>
+    <tr th:each="event : ${events}">
+        <td th:text="${event.get(keys[0])}"></td>
+        <td th:text="${event.get(keys[1])}"></td>
+        <td><img th:src = "@{${event.get(keys[2])}}"/></td>
     </tr>
     <tr>
-        <td  colspan="2"><span th:replace = "fragments :: techHubAddress"></span></td>
+        <td colspan="3"><span th:replace="fragments :: techHubAddress"></span></td>
     </tr>
 </table>
 
