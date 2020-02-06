@@ -1,6 +1,7 @@
 package org.launchcode.codingevents.models;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Objects;
@@ -20,14 +21,29 @@ public class Event {
     @Size(max = 500, message = "Description too long!")
     private String description;
 
+    @NotBlank(message = "Location is required")
+    @Size(min = 2, max = 50, message = "Location must be between 2 and 50 characters")
+    private String location;
+
+    @Min(value = 1, message = "There must be at least 1 attendee")
+    private int attendees;
+
+    private boolean registrationMandatory;
+
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
-    public Event(String name, String description, String contactEmail) {
+    public Event(String name, String description, String contactEmail,
+                String location, int attendees, boolean registrationMandatory) {
         this();
         this.name = name;
         this.description = description;
+
+        this.location = location;
+        this.attendees = attendees;
+        this.registrationMandatory = registrationMandatory;
+
         this.contactEmail = contactEmail;
     }
 
@@ -63,6 +79,18 @@ public class Event {
     public int getId() {
         return id;
     }
+
+    public String getLocation() {  return location;  }
+
+    public void setLocation(String location) { this.location = location;  }
+
+    public int getAttendees() { return attendees;  }
+
+    public void setAttendees(int attendees) { this.attendees = attendees; }
+
+    public boolean isRegistrationMandatory() {  return registrationMandatory;  }
+
+    public void setRegistrationMandatory(boolean registrationMandatory) { this.registrationMandatory = registrationMandatory; }
 
     @Override
     public String toString() {
